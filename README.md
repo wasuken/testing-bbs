@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+テストのためのテストPJ
 
-## Getting Started
+掲示板アプリのフロントエンドに関するテスト項目は以下のとおり。
 
-First, run the development server:
+### フロントエンドのテスト項目
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+#### 1. 投稿機能
+- **新規投稿作成**
+  - タイトルと本文が入力できるか
+  - 入力が必須のフィールドに未入力でエラーメッセージが表示されるか
+  - 正常なデータで投稿を作成できるか
+- **投稿一覧表示**
+  - 投稿が正しくリスト表示されるか
+  - 投稿のタイトル、投稿者名、投稿日が正しく表示されるか
+- **投稿詳細表示**
+  - 投稿をクリックすると詳細ページに遷移するか
+  - 本文が正しく表示されるか
+  - コメントセクションが表示されるか
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### 2. コメント機能
+- **コメント作成**
+  - コメント内容が入力できるか
+  - 入力が必須のフィールドに未入力でエラーメッセージが表示されるか
+  - 正常なデータでコメントを作成できるか
+- **コメント一覧表示**
+  - 各投稿のコメントが正しく表示されるか
+  - コメントの投稿者名と日時が正しく表示されるか
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+#### 3. 編集機能
+- **投稿編集**
+  - 投稿詳細ページから投稿を編集できるか
+  - 編集後、正しく変更内容が反映されるか
+- **コメント編集**
+  - コメントを編集できるか
+  - 編集後、正しく変更内容が反映されるか
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+#### 4. 削除機能
+- **投稿削除**
+  - 投稿詳細ページから投稿を削除できるか
+  - 削除確認メッセージが表示されるか
+- **コメント削除**
+  - コメントを削除できるか
+  - 削除確認メッセージが表示されるか
 
-## Learn More
+#### 5. ユーザーインターフェース
+- **レスポンシブデザイン**
+  - モバイルやタブレットでの表示が正しいか
+- **エラーメッセージ**
+  - 不正な操作に対して適切なエラーメッセージが表示されるか
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
