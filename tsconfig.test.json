@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"],
+  "baseUrl": ".",
+  "compilerOptions": {
+    "jsx": "react-jsx"
+  },
+  "paths": {
+    "@/*": ["./src/*"]
+  }
+}

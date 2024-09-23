@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import NewPostForm from '@/components/NewPostForm';
+import NewPostForm from '../src/components/NewPostForm';
 
 describe('NewPostForm', () => {
   test('renders form inputs', () => {

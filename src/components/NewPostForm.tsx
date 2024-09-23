@@ -37,7 +37,6 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ onSubmit }) => {
             id="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            required
           />
         </div>
         <div>
@@ -46,7 +45,6 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ onSubmit }) => {
             id="content"
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            required
           />
         </div>
         <button type="submit">投稿する</button>
