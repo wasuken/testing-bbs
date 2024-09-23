@@ -23,10 +23,29 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const links = [
+    {
+      link: "/posts/new",
+      text: "作成",
+    },
+    {
+      link: "/posts",
+      text: "一覧",
+    }
+  ]
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+	<header>
+	  {links.map((x) => (
+	    <div>
+	      <a href={x.link}>{x.text}</a>
+	    </div>
+	    ))}
+	</header>
+        <main>
+	  {children}
+	</main>
       </body>
     </html>
   );

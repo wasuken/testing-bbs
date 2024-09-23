@@ -5,13 +5,13 @@ import { useRouter } from 'next/navigation';
 const NewPost: React.FC = () => {
   const router = useRouter();
 
-  const handlePostSubmit = async (title: string, content: string) => {
+  const handlePostSubmit = async (title: string, content: string, author: string) => {
     const response = await fetch('/api/posts', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ title, content }),
+      body: JSON.stringify({ title, content, author }),
     });
 
     if (response.ok) {

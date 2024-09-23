@@ -15,6 +15,7 @@ describe('PostDetail', () => {
         author="投稿者A"
         createdAt="2024-09-04"
         comments={mockComments}
+	onDelete={() => {}}
       />
     );
 
