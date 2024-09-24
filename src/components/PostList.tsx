@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface Post {
   id: number;
@@ -16,9 +16,11 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
     <div>
       <h2>投稿一覧</h2>
       <ul>
-        {posts.map(post => (
+        {posts.map((post) => (
           <li key={post.id}>
-            <h3>{post.title}</h3>
+            <h3>
+              <a href={`/posts/${post.id}`}>{post.title}</a>
+            </h3>
             <p>投稿者: {post.author}</p>
             <p>投稿日: {post.createdAt}</p>
           </li>

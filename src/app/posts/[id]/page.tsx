@@ -1,11 +1,12 @@
-"use client"
-import PostDetail from '@/components/PostDetail';
-import { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from "next/navigation";
+"use client";
+import PostDetail from "@/components/PostDetail";
+import CommentList from "@/components/CommentList";
+import NewCommentForm from "@/components/NewCommentForm";
 
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const PostPage: React.FC = ({ params }: { params: { id: number } }) => {
-  const searchParams = useSearchParams();
   const id = params.id;
   const [post, setPost] = useState<any>(null);
   const [comments, setComments] = useState([]);
@@ -13,10 +14,10 @@ const PostPage: React.FC = ({ params }: { params: { id: number } }) => {
 
   const deletePost = async () => {
     const response = await fetch(`/api/posts/${id}`, {
-      method: 'DELETE',
+      method: "DELETE",
     });
-    router.push('/posts');
-  }
+    router.push("/posts");
+  };
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -37,18 +38,39 @@ const PostPage: React.FC = ({ params }: { params: { id: number } }) => {
       fetchComments();
     }
   }, [id]);
+  const handleCommentSubmit = async (content: string, author: string) => {
+    const response = await fetch(`/api/posts/${id}/comments`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ content, author }),
+    });
+
+    if (response.ok) {
+      const newComment = await response.json();
+      setComments((prev) => [...prev, newComment]); // コメントを追加
+    } else {
+      throw new Error("Failed to submit comment");
+    }
+  };
 
   if (!post) return <p>Loading...</p>;
 
   return (
-    <PostDetail
-      title={post.title}
-      content={post.content}
-      author={post.author}
-      createdAt={post.createdAt}
-      comments={comments}
-      onDelete={deletePost}
-    />
+    <>
+      <PostDetail
+        id={post.id}
+        title={post.title}
+        content={post.content}
+        author={post.author}
+        createdAt={post.createdAt}
+        comments={comments}
+        onDelete={deletePost}
+      />
+      <NewCommentForm onSubmit={handleCommentSubmit} />
+      <CommentList comments={comments} />
+    </>
   );
 };
 

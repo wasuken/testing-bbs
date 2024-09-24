@@ -31,21 +31,19 @@ export default function RootLayout({
     {
       link: "/posts",
       text: "一覧",
-    }
-  ]
+    },
+  ];
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-	<header>
-	  {links.map((x) => (
-	    <div>
-	      <a href={x.link}>{x.text}</a>
-	    </div>
-	    ))}
-	</header>
-        <main>
-	  {children}
-	</main>
+        <header>
+          {links.map((x) => (
+            <div>
+              <a href={x.link}>{x.text}</a>
+            </div>
+          ))}
+        </header>
+        <main>{children}</main>
       </body>
     </html>
   );

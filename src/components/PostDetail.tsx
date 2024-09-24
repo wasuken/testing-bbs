@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import { useRouter } from "next/navigation";
 
 interface Comment {
   id: number;
@@ -8,31 +9,39 @@ interface Comment {
 }
 
 interface PostDetailProps {
+  id: number;
   title: string;
   content: string;
   author: string;
   createdAt: string;
-  comments: Comment[];
+  onDelete: () => void;
 }
 
-const PostDetail: React.FC<PostDetailProps> = ({ title, content, author, createdAt, comments }) => {
+const PostDetail: React.FC<PostDetailProps> = ({
+  id,
+  title,
+  content,
+  author,
+  createdAt,
+  onDelete,
+}) => {
+  const router = useRouter();
   return (
     <div>
-      <h1>{title}</h1>
+      <h1>
+        {title}
+        <button onClick={onDelete}>削除</button>
+        <button
+          onClick={() => {
+            router.push(`/posts/${id}/edit`);
+          }}
+        >
+          更新
+        </button>
+      </h1>
       <div>{content}</div>
       <div>投稿者: {author}</div>
       <div>投稿日: {createdAt}</div>
-
-      <h2>コメント</h2>
-      <ul>
-        {comments.map(comment => (
-          <li key={comment.id}>
-            <div>{comment.content}</div>
-            <div>投稿者: {comment.author}</div>
-            <div>投稿日: {comment.createdAt}</div>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 };
