@@ -1,29 +1,20 @@
 import React from "react";
-
-interface Comment {
-  id: number;
-  content: string;
-  author: string;
-  createdAt: string;
-}
-
-interface CommentListProps {
-  comments: Comment[];
-}
+import ListGroup from "react-bootstrap/ListGroup";
+import { Comment, CommentListProps } from '@/types'
 
 const CommentList: React.FC<CommentListProps> = ({ comments }) => {
   return (
     <div>
       <h2>コメント</h2>
-      <ul>
+      <ListGroup>
         {comments.map((comment) => (
-          <li key={comment.id}>
-            <p>{comment.content}</p>
-            <p>投稿者: {comment.author}</p>
-            <p>投稿日: {comment.createdAt}</p>
-          </li>
+          <ListGroup.Item key={comment.id}>
+            <div>{comment.content}</div>
+            <div>投稿者: {comment.author}</div>
+            <div>投稿日: {comment.createdAt}</div>
+          </ListGroup.Item>
         ))}
-      </ul>
+      </ListGroup>
     </div>
   );
 };

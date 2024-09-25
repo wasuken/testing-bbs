@@ -13,3 +13,28 @@ export interface Comment {
   author: string;
   createdAt: string;
 }
+
+export interface CommentListProps {
+  comments: Comment[];
+}
+
+export interface NewCommentFormProps {
+  onSubmit: (content: string) => Promise<void>;
+}
+
+export interface PostDetailProps {
+  post: Post;
+  onDelete: () => void;
+  onEdit: () => void;
+}
+
+export interface PostFormProps {
+  initialTitle?: string;
+  initialContent?: string;
+  onSubmit: (title: string, content: string) => Promise<void>;
+  submitButtonText: string;
+}
+
+export interface PostListProps {
+  posts: Post[];
+}

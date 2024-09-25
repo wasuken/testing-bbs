@@ -1,48 +1,45 @@
 import React from "react";
 import { useRouter } from "next/navigation";
-
-interface Comment {
-  id: number;
-  content: string;
-  author: string;
-  createdAt: string;
-}
-
-interface PostDetailProps {
-  id: number;
-  title: string;
-  content: string;
-  author: string;
-  createdAt: string;
-  onDelete: () => void;
-}
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
+import { PostDetailProps } from '@/types'
 
 const PostDetail: React.FC<PostDetailProps> = ({
-  id,
-  title,
-  content,
-  author,
-  createdAt,
+  post,
   onDelete,
+  onEdit,
 }) => {
-  const router = useRouter();
+  const {
+    id,
+    title,
+    content,
+    author,
+    createdAt,
+  } = post;
   return (
-    <div>
-      <h1>
-        {title}
-        <button onClick={onDelete}>削除</button>
-        <button
-          onClick={() => {
-            router.push(`/posts/${id}/edit`);
-          }}
-        >
-          更新
-        </button>
-      </h1>
-      <div>{content}</div>
-      <div>投稿者: {author}</div>
-      <div>投稿日: {createdAt}</div>
-    </div>
+    <Container fluid>
+      <Row>
+        <Col xs={1}>
+          <h1>{title}</h1>
+        </Col>
+        <Col xs={4}>
+          <Button variant="danger" onClick={onDelete}>
+            削除
+          </Button>
+          <Button
+            variant="warning"
+            onClick={onEdit}
+          >
+            更新
+          </Button>
+        </Col>
+      </Row>
+      <Row>{content}</Row>
+      <Row>投稿者: {author}</Row>
+      <Row>投稿日: {createdAt}</Row>
+    </Container>
   );
 };
 

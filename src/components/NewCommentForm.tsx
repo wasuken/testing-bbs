@@ -1,8 +1,8 @@
 import { useState } from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import { NewCommentFormProps } from '@/types';
 
-interface NewCommentFormProps {
-  onSubmit: (content: string) => Promise<void>;
-}
 
 const NewCommentForm: React.FC<NewCommentFormProps> = ({ onSubmit }) => {
   const [content, setContent] = useState<string>("");
@@ -30,28 +30,31 @@ const NewCommentForm: React.FC<NewCommentFormProps> = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       {error && <p style={{ color: "red" }}>{error}</p>}
-      <div>
-        <label htmlFor="content">コメント</label>
-        <textarea
-          id="content"
+      <Form.Group className="mb-3" controlId="NewCommentForm.Title">
+        <Form.Label>コメント</Form.Label>
+        <Form.Control
+          as="textarea"
+          rows={3}
           value={content}
           onChange={(e) => setContent(e.target.value)}
           required
         />
-      </div>
-      <div>
-        <label htmlFor="title">ニックネーム</label>
-        <input
-          type="text"
-          id="author"
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="PostForm.Author">
+        <Form.Label>ニックネーム</Form.Label>
+        <Form.Control
+          type="author"
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
+          required
         />
-      </div>
-      <button type="submit">コメントを投稿</button>
-    </form>
+      </Form.Group>
+      <Button variant="primary" type="submit">
+        コメントを投稿
+      </Button>
+    </Form>
   );
 };
 

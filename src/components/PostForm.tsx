@@ -1,11 +1,7 @@
 import { useState } from "react";
-
-interface PostFormProps {
-  initialTitle?: string;
-  initialContent?: string;
-  onSubmit: (title: string, content: string) => Promise<void>;
-  submitButtonText: string;
-}
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import { PostFormProps } from '@/types'
 
 const PostForm: React.FC<PostFormProps> = ({
   initialTitle = "",
@@ -34,29 +30,31 @@ const PostForm: React.FC<PostFormProps> = ({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       {error && <p style={{ color: "red" }}>{error}</p>}
-      <div>
-        <label htmlFor="title">タイトル</label>
-        <input
-          type="text"
-          id="title"
+      <Form.Group className="mb-3" controlId="PostForm.Title">
+        <Form.Label>タイトル</Form.Label>
+        <Form.Control
+          type="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
         />
-      </div>
-      <div>
-        <label htmlFor="content">本文</label>
-        <textarea
-          id="content"
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="PostForm.Content">
+        <Form.Label>コンテンツ</Form.Label>
+        <Form.Control
+          as="textarea"
+          rows={3}
           value={content}
           onChange={(e) => setContent(e.target.value)}
           required
         />
-      </div>
-      <button type="submit">{submitButtonText}</button>
-    </form>
+      </Form.Group>
+      <Button type="submit" variant="primary">
+        {submitButtonText}
+      </Button>
+    </Form>
   );
 };
 

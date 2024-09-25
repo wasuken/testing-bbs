@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
+import AppHeader from "@/components/Header";
+
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,26 +25,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const links = [
-    {
-      link: "/posts/new",
-      text: "作成",
-    },
-    {
-      link: "/posts",
-      text: "一覧",
-    },
-  ];
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <header>
-          {links.map((x) => (
-            <div>
-              <a href={x.link}>{x.text}</a>
-            </div>
-          ))}
-        </header>
+        <AppHeader />
         <main>{children}</main>
       </body>
     </html>

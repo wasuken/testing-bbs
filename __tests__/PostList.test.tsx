@@ -2,8 +2,8 @@ import { render, screen } from "@testing-library/react";
 import PostList from "../src/components/PostList";
 
 const mockPosts = [
-  { id: 1, title: "テスト投稿1", author: "ユーザーA", createdAt: "2024-09-01" },
-  { id: 2, title: "テスト投稿2", author: "ユーザーB", createdAt: "2024-09-02" },
+  { id: 1, title: "テスト投稿1", content: 'コンテンツ1', author: "ユーザーA", createdAt: "2024-09-01" },
+  { id: 2, title: "テスト投稿2", content: 'コンテンツ2', author: "ユーザーB", createdAt: "2024-09-02" },
 ];
 
 describe("PostList", () => {

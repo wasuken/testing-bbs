@@ -60,15 +60,13 @@ const PostPage: React.FC = ({ params }: { params: { id: number } }) => {
   return (
     <>
       <PostDetail
-        id={post.id}
-        title={post.title}
-        content={post.content}
-        author={post.author}
-        createdAt={post.createdAt}
-        comments={comments}
+	post={post}
         onDelete={deletePost}
+	onEdit={() => router.push(`/posts/${post.id}/edit`)}
       />
+      <hr />
       <NewCommentForm onSubmit={handleCommentSubmit} />
+      <hr />
       <CommentList comments={comments} />
     </>
   );
