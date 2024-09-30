@@ -1,8 +1,7 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { NewCommentFormProps } from '@/types';
-
+import { NewCommentFormProps } from "@/types";
 
 const NewCommentForm: React.FC<NewCommentFormProps> = ({ onSubmit }) => {
   const [content, setContent] = useState<string>("");
@@ -32,6 +31,15 @@ const NewCommentForm: React.FC<NewCommentFormProps> = ({ onSubmit }) => {
   return (
     <Form onSubmit={handleSubmit}>
       {error && <p style={{ color: "red" }}>{error}</p>}
+      <Form.Group className="mb-3" controlId="PostForm.Author">
+        <Form.Label>ニックネーム</Form.Label>
+        <Form.Control
+          type="author"
+          value={author}
+          onChange={(e) => setAuthor(e.target.value)}
+          required
+        />
+      </Form.Group>
       <Form.Group className="mb-3" controlId="NewCommentForm.Title">
         <Form.Label>コメント</Form.Label>
         <Form.Control
@@ -39,15 +47,6 @@ const NewCommentForm: React.FC<NewCommentFormProps> = ({ onSubmit }) => {
           rows={3}
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          required
-        />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="PostForm.Author">
-        <Form.Label>ニックネーム</Form.Label>
-        <Form.Control
-          type="author"
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
           required
         />
       </Form.Group>

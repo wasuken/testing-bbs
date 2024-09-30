@@ -6,9 +6,9 @@ export async function POST(req: Request) {
   const { title, content, author } = await req.json();
 
   // 簡単なバリデーション
-  if (!title || !content || !author) {
+  if (!title || !content) {
     return NextResponse.json(
-      { message: "タイトルと内容とニックネームは必須です。" },
+      { message: "タイトルと内容は必須です。" },
       { status: 400 },
     );
   }
@@ -16,7 +16,7 @@ export async function POST(req: Request) {
     data: {
       title,
       content,
-      author,
+      author: author ?? "",
     },
   });
 

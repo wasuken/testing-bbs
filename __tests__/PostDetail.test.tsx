@@ -3,20 +3,16 @@ import PostDetail from "../src/components/PostDetail";
 
 const mockPost = {
   id: 1,
-  title: 'テスト投稿jfkldjaklfjkdalsjfkldsa',
-  content: 'これはテスト投稿の内容です。',
-  author: '投稿者A',
+  title: "テスト投稿jfkldjaklfjkdalsjfkldsa",
+  content: "これはテスト投稿の内容です。",
+  author: "投稿者A",
   createdAt: "2024-09-04",
-}
+};
 
 describe("PostDetail", () => {
   test("renders post details and comments", () => {
     render(
-      <PostDetail
-	post={mockPost}
-        onDelete={() => {}}
-	onEdit={() => {}}
-      />,
+      <PostDetail post={mockPost} onDelete={() => {}} onEdit={() => {}} />,
     );
 
     expect(

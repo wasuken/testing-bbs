@@ -1,16 +1,18 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { PostFormProps } from '@/types'
+import { PostFormProps } from "@/types";
 
 const PostForm: React.FC<PostFormProps> = ({
   initialTitle = "",
   initialContent = "",
+  initialAuthor = "",
   onSubmit,
   submitButtonText,
 }) => {
   const [title, setTitle] = useState<string>(initialTitle);
   const [content, setContent] = useState<string>(initialContent);
+  const [author, setAuthor] = useState<string>(initialAuthor);
   const [error, setError] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -23,7 +25,7 @@ const PostForm: React.FC<PostFormProps> = ({
     }
 
     try {
-      await onSubmit(title, content);
+      await onSubmit(title, content, author);
     } catch (err) {
       setError("投稿に失敗しました。");
     }
@@ -32,6 +34,15 @@ const PostForm: React.FC<PostFormProps> = ({
   return (
     <Form onSubmit={handleSubmit}>
       {error && <p style={{ color: "red" }}>{error}</p>}
+      <Form.Group className="mb-3" controlId="PostForm.Title">
+        <Form.Label>ニックネーム</Form.Label>
+        <Form.Control
+          type="author"
+          value={author}
+          onChange={(e) => setAuthor(e.target.value)}
+          required
+        />
+      </Form.Group>
       <Form.Group className="mb-3" controlId="PostForm.Title">
         <Form.Label>タイトル</Form.Label>
         <Form.Control

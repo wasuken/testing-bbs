@@ -31,6 +31,7 @@ export interface PostDetailProps {
 export interface PostFormProps {
   initialTitle?: string;
   initialContent?: string;
+  initialAuthor?: string;
   onSubmit: (title: string, content: string) => Promise<void>;
   submitButtonText: string;
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import { Comment, CommentListProps } from '@/types'
+import { Comment, CommentListProps } from "@/types";
 
 const CommentList: React.FC<CommentListProps> = ({ comments }) => {
   return (
