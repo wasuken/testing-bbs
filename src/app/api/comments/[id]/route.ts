@@ -7,20 +7,20 @@ export async function GET(
   { params }: { params: { id: number } },
 ) {
   const id = Number(params.id);
-  const post = await prisma.post.findFirst({
+  const comment = await prisma.comment.findFirst({
     where: {
-      id: id,
+      id,
     },
   });
 
-  if (!post) {
+  if (!comment) {
     return NextResponse.json(
       { message: "投稿が見つかりません。" },
       { status: 404 },
     );
   }
 
-  return NextResponse.json(post);
+  return NextResponse.json(comment);
 }
 
 export async function PUT(
@@ -28,7 +28,7 @@ export async function PUT(
   { params }: { params: { id: number } },
 ) {
   const { title, content, author, categoryId } = await req.json();
-  const id = Number(params.id);
+  const id = params.id;
 
   if (!title || !content || categoryId) {
     return NextResponse.json(
@@ -38,7 +38,7 @@ export async function PUT(
   }
   const post = await prisma.post.update({
     where: {
-      id: Number(id),
+      id,
     },
     data: {
       title,

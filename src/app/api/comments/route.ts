@@ -3,21 +3,20 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export async function POST(
-  req: Request,
-  { params }: { params: { id: string } },
+  req: Request
 ) {
-  const { content, author } = await req.json();
+  const { postId, content, author } = await req.json();
 
-  if (!content) {
+  if (!content || postId) {
     return NextResponse.json(
-      { message: "コメントは必須です。" },
+      { message: "親Postとコメントは必須です。" },
       { status: 400 },
     );
   }
 
   const newComment = await prisma.comment.create({
     data: {
-      postId: Number(params.id),
+      postId,
       content,
       author,
     },
@@ -25,14 +24,7 @@ export async function POST(
   return NextResponse.json(newComment, { status: 201 });
 }
 
-export async function GET(
-  req: Request,
-  { params }: { params: { id: string } },
-) {
-  const comments = await prisma.comment.findMany({
-    where: {
-      postId: Number(params.id),
-    },
-  });
+export async function GET() {
+  const comments = await prisma.comment.findMany({});
   return NextResponse.json(comments);
 }

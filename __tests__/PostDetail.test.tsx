@@ -6,6 +6,11 @@ const mockPost = {
   title: "テスト投稿jfkldjaklfjkdalsjfkldsa",
   content: "これはテスト投稿の内容です。",
   author: "投稿者A",
+  category: {
+    id: 1,
+    title: "test category",
+    createdAt: "2022-01-01 00:00:00",
+  },
   createdAt: "2024-09-04",
 };
 

@@ -3,15 +3,26 @@ export interface Post {
   title: string;
   content: string;
   author: string;
+  category: Category;
   createdAt: string;
 }
 
 export interface Comment {
   id: number;
-  post_id: number;
+  post: Post;
   content: string;
   author: string;
   createdAt: string;
+}
+
+export interface Category {
+  id: number;
+  title: string;
+  createdAt: string;
+}
+
+export interface CategoryListProps {
+  categories: Category[];
 }
 
 export interface CommentListProps {

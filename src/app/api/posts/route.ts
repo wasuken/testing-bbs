@@ -1,14 +1,16 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-export async function POST(req: Request) {
-  const { title, content, author } = await req.json();
+export async function POST(
+  req: NextRequest,
+) {
+  const { title, content, author, categoryId } = await req.json();
 
   // 簡単なバリデーション
-  if (!title || !content) {
+  if (!title || !content || categoryId) {
     return NextResponse.json(
-      { message: "タイトルと内容は必須です。" },
+      { message: "タイトルと内容とニックネームとカテゴリは必須です。" },
       { status: 400 },
     );
   }
@@ -17,6 +19,7 @@ export async function POST(req: Request) {
       title,
       content,
       author: author ?? "",
+      categoryId,
     },
   });
 
@@ -24,6 +27,6 @@ export async function POST(req: Request) {
 }
 
 export async function GET() {
-  const posts = await prisma.post.findMany();
+  const posts = await prisma.post.findMany({});
   return NextResponse.json(posts);
 }

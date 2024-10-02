@@ -8,6 +8,11 @@ const mockPosts = [
     content: "コンテンツ1",
     author: "ユーザーA",
     createdAt: "2024-09-01",
+    category: {
+      id: 1,
+      title: "test category",
+      createdAt: "2022-01-01 00:00:00",
+    },
   },
   {
     id: 2,
@@ -15,6 +20,11 @@ const mockPosts = [
     content: "コンテンツ2",
     author: "ユーザーB",
     createdAt: "2024-09-02",
+    category: {
+      id: 1,
+      title: "test category",
+      createdAt: "2022-01-01 00:00:00",
+    },
   },
 ];
 
