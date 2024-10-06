@@ -1,11 +1,11 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   const { postId, content, author } = await req.json();
 
-  if (!content || postId) {
+  if (!content || !postId) {
     return NextResponse.json(
       { message: "親Postとコメントは必須です。" },
       { status: 400 },
@@ -14,7 +14,7 @@ export async function POST(req: Request) {
 
   const newComment = await prisma.comment.create({
     data: {
-      postId,
+      postId: Number(postId),
       content,
       author,
     },
@@ -22,7 +22,13 @@ export async function POST(req: Request) {
   return NextResponse.json(newComment, { status: 201 });
 }
 
-export async function GET() {
-  const comments = await prisma.comment.findMany({});
+export async function GET(req: NextRequest) {
+  const searchParams = req.nextUrl.searchParams;
+  const postId = Number(searchParams.get("postId"));
+  const comments = await prisma.comment.findMany({
+    where: {
+      postId,
+    },
+  });
   return NextResponse.json(comments);
 }

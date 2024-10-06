@@ -6,11 +6,10 @@ import PostForm from "@/components/PostForm";
 const EditPostPage: React.FC = ({ params }: { params: { id: number } }) => {
   const router = useRouter();
   const id = params.id;
-  const [post, setPost] = useState<any>(null);
+  const [post, setPost] = useState<Post | null>(null);
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [author, setAuthor] = useState<string>("");
-  const [error, setError] = useState<string>("");
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -19,6 +18,7 @@ const EditPostPage: React.FC = ({ params }: { params: { id: number } }) => {
       setPost(data);
       setTitle(data.title);
       setContent(data.content);
+      setAuthor(data.author);
     };
 
     if (id) {
@@ -28,7 +28,6 @@ const EditPostPage: React.FC = ({ params }: { params: { id: number } }) => {
 
   const handlePostSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError("");
     let nauthor = author;
 
     if (!title || !content) {
@@ -42,7 +41,7 @@ const EditPostPage: React.FC = ({ params }: { params: { id: number } }) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ title, content, nauthor }),
+      body: JSON.stringify({ title, content, author: nauthor }),
     });
 
     if (response.ok) {

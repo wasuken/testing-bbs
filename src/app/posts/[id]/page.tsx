@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 const PostPage: React.FC = ({ params }: { params: { id: number } }) => {
   const id = params.id;
-  const [post, setPost] = useState<any>(null);
+  const [post, setPost] = useState<Post | null>(null);
   const [comments, setComments] = useState([]);
   const router = useRouter();
 
@@ -16,7 +16,11 @@ const PostPage: React.FC = ({ params }: { params: { id: number } }) => {
     const response = await fetch(`/api/posts/${id}`, {
       method: "DELETE",
     });
-    router.push("/posts");
+    if (response.ok) {
+      router.push("/posts");
+    } else {
+      alert(`Error: delete failed`);
+    }
   };
 
   useEffect(() => {
@@ -28,7 +32,7 @@ const PostPage: React.FC = ({ params }: { params: { id: number } }) => {
     };
 
     const fetchComments = async () => {
-      const response = await fetch(`/api/posts/${id}/comments`);
+      const response = await fetch(`/api/comments?postId=${id}`);
       const data = await response.json();
       setComments(data);
     };
@@ -39,12 +43,12 @@ const PostPage: React.FC = ({ params }: { params: { id: number } }) => {
     }
   }, [id]);
   const handleCommentSubmit = async (content: string, author: string) => {
-    const response = await fetch(`/api/posts/${id}/comments`, {
+    const response = await fetch(`/api/comments`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ content, author }),
+      body: JSON.stringify({ content, author, postId: id }),
     });
 
     if (response.ok) {

@@ -24,6 +24,7 @@ const NewCommentForm: React.FC<NewCommentFormProps> = ({ onSubmit }) => {
       setContent(""); // フォームをリセット
       setAuthor("");
     } catch (err) {
+      console.error(err);
       setError("コメントの投稿に失敗しました。");
     }
   };

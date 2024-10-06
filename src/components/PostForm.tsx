@@ -30,6 +30,7 @@ const PostForm: React.FC<PostFormProps> = ({
     try {
       await onSubmit(title, content, author, categoryId);
     } catch (err) {
+      console.error(err);
       setError("投稿に失敗しました。");
     }
   };

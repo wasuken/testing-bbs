@@ -2,7 +2,7 @@
 import CategoryList from "@/components/CategoryList";
 import { useEffect, useState } from "react";
 
-// カテゴリ一覧
+// カテゴリ一覧を表示する
 const CategoriesPage: React.FC = () => {
   const [categories, setCategories] = useState([]);
 

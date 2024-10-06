@@ -1,8 +1,7 @@
 "use client";
 import NewCategoryForm from "@/components/NewCategoryForm";
-import { useEffect, useState } from "react";
 
-// カテゴリ一覧
+// カテゴリを作成する
 const CategoryPage: React.FC = () => {
   const postCategory = async (category: string) => {
     const response = await fetch("/api/categories", {
@@ -11,7 +10,10 @@ const CategoryPage: React.FC = () => {
         title: category,
       }),
     });
-    const data = await response.json();
+    if (!response.ok) {
+      alert(`error: request failed.`);
+    }
+    await response.json();
     setCategory("");
   };
 

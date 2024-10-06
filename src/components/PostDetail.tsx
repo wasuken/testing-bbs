@@ -1,5 +1,4 @@
 import React from "react";
-import { useRouter } from "next/navigation";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -7,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import { PostDetailProps } from "@/types";
 
 const PostDetail: React.FC<PostDetailProps> = ({ post, onDelete, onEdit }) => {
-  const { id, title, content, author, createdAt } = post;
+  const { title, content, author, createdAt } = post;
   return (
     <Container fluid>
       <h1>{title}</h1>
