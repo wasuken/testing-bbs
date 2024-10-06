@@ -7,7 +7,7 @@ import * as appHandler from "../../src/app/api/posts/route";
 it("posts test", async () => {
   await testApiHandler({
     appHandler,
-    params: { categoryId: '1' },
+    params: { categoryId: "1" },
     test: async ({ fetch }) => {
       await expect(fetch()).resolves.toBeDefined();
     },

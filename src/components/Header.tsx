@@ -10,7 +10,8 @@ function AppHeader() {
         <Navbar.Brand href="/">testing-bbs</Navbar.Brand>
         <Nav className="me-auto">
           <Nav.Link href="/">ホーム</Nav.Link>
-          <Nav.Link href="/posts">一覧</Nav.Link>
+          <Nav.Link href="/categories">カテゴリ一覧</Nav.Link>
+          <Nav.Link href="/categories/new">カテゴリ作成</Nav.Link>
           <Nav.Link href="/posts/new">記事作成</Nav.Link>
         </Nav>
       </Container>

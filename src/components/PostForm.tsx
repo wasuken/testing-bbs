@@ -7,12 +7,15 @@ const PostForm: React.FC<PostFormProps> = ({
   initialTitle = "",
   initialContent = "",
   initialAuthor = "",
+  initialCategoryId = -1,
   onSubmit,
   submitButtonText,
+  categories,
 }) => {
   const [title, setTitle] = useState<string>(initialTitle);
   const [content, setContent] = useState<string>(initialContent);
   const [author, setAuthor] = useState<string>(initialAuthor);
+  const [categoryId, setCategoryId] = useState<string>(initialCategoryId);
   const [error, setError] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -25,7 +28,7 @@ const PostForm: React.FC<PostFormProps> = ({
     }
 
     try {
-      await onSubmit(title, content, author);
+      await onSubmit(title, content, author, categoryId);
     } catch (err) {
       setError("投稿に失敗しました。");
     }
@@ -42,6 +45,21 @@ const PostForm: React.FC<PostFormProps> = ({
           onChange={(e) => setAuthor(e.target.value)}
           required
         />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="PostForm.Title">
+        <Form.Label>カテゴリ</Form.Label>
+        <Form.Select
+          defaultValue={categoryId}
+          value={categoryId}
+          onChange={(e) => setCategoryId(Number(e.target.value))}
+          required
+        >
+          {categories.map((cat) => (
+            <option value={cat.id} key={cat.id}>
+              {cat.title}
+            </option>
+          ))}
+        </Form.Select>
       </Form.Group>
       <Form.Group className="mb-3" controlId="PostForm.Title">
         <Form.Label>タイトル</Form.Label>

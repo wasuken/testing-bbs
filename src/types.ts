@@ -45,6 +45,7 @@ export interface PostFormProps {
   initialAuthor?: string;
   onSubmit: (title: string, content: string) => Promise<void>;
   submitButtonText: string;
+  categories: Category[];
 }
 
 export interface PostListProps {

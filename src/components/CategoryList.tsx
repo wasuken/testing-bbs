@@ -10,7 +10,7 @@ const CategoryList: React.FC<CategoryListProps> = ({ categories }) => {
         {categories.map((category) => (
           <ListGroup.Item key={category.id}>
             <h3>
-              <a href={`/categories/${category.id}`}>{category.title}</a>
+              <a href={`/posts?categoryId=${category.id}`}>{category.title}</a>
             </h3>
           </ListGroup.Item>
         ))}

@@ -30,6 +30,7 @@ const NewCommentForm: React.FC<NewCommentFormProps> = ({ onSubmit }) => {
 
   return (
     <Form onSubmit={handleSubmit}>
+      <h2>コメント一覧</h2>
       {error && <p style={{ color: "red" }}>{error}</p>}
       <Form.Group className="mb-3" controlId="PostForm.Author">
         <Form.Label>ニックネーム</Form.Label>
