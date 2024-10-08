@@ -1,33 +1,26 @@
 "use client";
 import PostList from "@/components/PostList";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { GetServerSideProps } from 'next';
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
 
-export async function getServerSideProps(context: GetServerSidePropsContext){
-  try{
-    const data = await prisma.post.findMany({
-      where: {
-	categoryId,
-      },
-    });
-    return {
-      props: {
-	data,
-      }
-    }
-  }catch(error){
-    // console.error("Error in server side", error);
-    console.log('no id.');
-    return {
-      props: { data: [] }
-    }
-  }
-}
+const PostsPage: React.FC = () => {
+  const searchParams = useSearchParams();
+  const categoryId = searchParams.get("categoryId");
+  const [posts, setPosts] = useState([]);
 
-const PostsPage: React.FC = ({ data }) => {
-  return <PostList posts={data} />;
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const url =
+        `/api/posts` + (categoryId ? `?categoryId=${categoryId}` : "");
+      const response = await fetch(url);
+      const data = await response.json();
+      setPosts(data);
+    };
+
+    fetchPosts();
+  }, []);
+
+  return <PostList posts={posts} />;
 };
 
 export default PostsPage;
