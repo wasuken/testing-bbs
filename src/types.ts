@@ -1,24 +1,24 @@
 export interface Post {
-  id: number;
+  id?: number;
   title: string;
   content: string;
   author: string;
   category: Category;
-  createdAt: string;
+  createdAt?: string;
 }
 
 export interface Comment {
-  id: number;
+  id?: number;
   post: Post;
   content: string;
   author: string;
-  createdAt: string;
+  createdAt?: string;
 }
 
 export interface Category {
-  id: number;
+  id?: number;
   title: string;
-  createdAt: string;
+  createdAt?: string;
 }
 
 export interface CategoryListProps {
@@ -40,10 +40,8 @@ export interface PostDetailProps {
 }
 
 export interface PostFormProps {
-  initialTitle?: string;
-  initialContent?: string;
-  initialAuthor?: string;
-  onSubmit: (title: string, content: string) => Promise<void>;
+  initialPost: Post;
+  onSubmit: (title: string, content: string, author: string, categoryId: number) => void;
   submitButtonText: string;
   categories: Category[];
 }
