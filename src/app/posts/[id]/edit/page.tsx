@@ -57,7 +57,7 @@ const EditPostPage: React.FC = ({ params }: { params: { id: number } }) => {
     <div>
       <h1>記事編集</h1>
       <PostForm
-	initialPost={post}
+        initialPost={post}
         onSubmit={handlePostSubmit}
         submitButtonText="更新する"
       />

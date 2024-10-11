@@ -5,12 +5,12 @@ import { PostFormProps } from "@/types";
 
 const PostForm: React.FC<PostFormProps> = ({
   initialPost = {
-    title: '',
-    content: '',
-    author: '',
+    title: "",
+    content: "",
+    author: "",
     category: {
       id: -1,
-    }
+    },
   },
   onSubmit,
   submitButtonText,
@@ -19,12 +19,13 @@ const PostForm: React.FC<PostFormProps> = ({
   const [title, setTitle] = useState<string>(initialPost.title);
   const [content, setContent] = useState<string>(initialPost.content);
   const [author, setAuthor] = useState<string>(initialPost.author);
-  const [categoryId, setCategoryId] = useState<number>(initialPost.category.id ?? -1);
-  const [error, setError] = useState<string|null>(null);
+  const [categoryId, setCategoryId] = useState<number>(
+    initialPost.category.id ?? -1,
+  );
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError(null);
 
     if (!title || !content) {
       setError("タイトルと内容は必須です。");
@@ -33,9 +34,10 @@ const PostForm: React.FC<PostFormProps> = ({
 
     try {
       await onSubmit(title, content, author, categoryId);
+      setError(null);
     } catch (err) {
-      // console.error(err);
       setError("投稿に失敗しました。");
+      console.log(err);
     }
   };
 
@@ -47,7 +49,7 @@ const PostForm: React.FC<PostFormProps> = ({
         <Form.Control
           type="author"
           value={author}
-	  placeholder="ニックネーム"
+          placeholder="ニックネーム"
           onChange={(e) => setAuthor(e.target.value)}
         />
       </Form.Group>
@@ -69,15 +71,15 @@ const PostForm: React.FC<PostFormProps> = ({
         <Form.Control
           type="title"
           value={title}
-	  placeholder="タイトル"
+          placeholder="タイトル"
           onChange={(e) => setTitle(e.target.value)}
         />
       </Form.Group>
       <Form.Group className="mb-3" controlId="PostForm.Content">
         <Form.Label>コンテンツ</Form.Label>
         <Form.Control
-	  as="textarea"
-	  placeholder="コンテンツ"
+          as="textarea"
+          placeholder="コンテンツ"
           rows={3}
           value={content}
           onChange={(e) => setContent(e.target.value)}

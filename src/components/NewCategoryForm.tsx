@@ -19,8 +19,8 @@ const NewCategoryForm: React.FC<CategoryFormProps> = ({ onSubmit }) => {
     try {
       await onSubmit(title);
     } catch (err) {
-      console.error(err);
       setError("投稿に失敗しました。");
+      console.log(err);
     }
   };
 

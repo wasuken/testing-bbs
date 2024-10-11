@@ -30,7 +30,8 @@ export interface CommentListProps {
 }
 
 export interface NewCommentFormProps {
-  onSubmit: (content: string) => Promise<void>;
+  onSubmit: (content: string, author: string) => void;
+  submitButtonText: string;
 }
 
 export interface PostDetailProps {
@@ -41,7 +42,12 @@ export interface PostDetailProps {
 
 export interface PostFormProps {
   initialPost: Post;
-  onSubmit: (title: string, content: string, author: string, categoryId: number) => void;
+  onSubmit: (
+    title: string,
+    content: string,
+    author: string,
+    categoryId: number,
+  ) => void;
   submitButtonText: string;
   categories: Category[];
 }
