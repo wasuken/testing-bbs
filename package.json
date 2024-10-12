@@ -7,9 +7,18 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "check-types": "tsc --noEmit",
+    "lint:fix": "eslint src/**/*.{ts,tsx} --fix",
     "format": "prettier --write .",
     "test": "NODE_ENV=test jest",
     "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "yarn lint",
+      "yarn format",
+      "yarn lint:fix"
+    ]
   },
   "husky": {
     "hooks": {
