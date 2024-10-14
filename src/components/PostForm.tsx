@@ -1,13 +1,13 @@
-import { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import { PostFormProps } from "@/types";
+import { useState } from 'react'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+import { PostFormProps } from '@/types'
 
 const PostForm: React.FC<PostFormProps> = ({
   initialPost = {
-    title: "",
-    content: "",
-    author: "",
+    title: '',
+    content: '',
+    author: '',
     category: {
       id: -1,
     },
@@ -16,34 +16,34 @@ const PostForm: React.FC<PostFormProps> = ({
   submitButtonText,
   categories,
 }) => {
-  const [title, setTitle] = useState<string>(initialPost.title);
-  const [content, setContent] = useState<string>(initialPost.content);
-  const [author, setAuthor] = useState<string>(initialPost.author);
+  const [title, setTitle] = useState<string>(initialPost.title)
+  const [content, setContent] = useState<string>(initialPost.content)
+  const [author, setAuthor] = useState<string>(initialPost.author)
   const [categoryId, setCategoryId] = useState<number>(
     initialPost.category.id ?? -1,
-  );
-  const [error, setError] = useState<string | null>(null);
+  )
+  const [error, setError] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    if (!title || !content) {
-      setError("タイトルと内容は必須です。");
-      return;
+    if (!title || !content || title.length <= 0 || content.length <= 0) {
+      setError('タイトルと内容は必須です。')
+      return
     }
 
     try {
-      await onSubmit(title, content, author, categoryId);
-      setError(null);
+      await onSubmit(title, content, author, categoryId)
+      setError(null)
     } catch (err) {
-      setError("投稿に失敗しました。");
-      console.log(err);
+      setError('投稿に失敗しました。')
+      console.error(err)
     }
-  };
+  }
 
   return (
     <Form onSubmit={handleSubmit}>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <Form.Group className="mb-3" controlId="PostForm.Nickname">
         <Form.Label>ニックネーム</Form.Label>
         <Form.Control
@@ -89,7 +89,7 @@ const PostForm: React.FC<PostFormProps> = ({
         {submitButtonText}
       </Button>
     </Form>
-  );
-};
+  )
+}
 
-export default PostForm;
+export default PostForm

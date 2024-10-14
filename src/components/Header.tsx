@@ -1,7 +1,7 @@
-"use client";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
+'use client'
+import Container from 'react-bootstrap/Container'
+import Nav from 'react-bootstrap/Nav'
+import Navbar from 'react-bootstrap/Navbar'
 
 function AppHeader() {
   return (
@@ -16,7 +16,7 @@ function AppHeader() {
         </Nav>
       </Container>
     </Navbar>
-  );
+  )
 }
 
-export default AppHeader;
+export default AppHeader

@@ -1,6 +1,6 @@
-import React from "react";
-import ListGroup from "react-bootstrap/ListGroup";
-import { CategoryListProps } from "@/types";
+import React from 'react'
+import ListGroup from 'react-bootstrap/ListGroup'
+import { CategoryListProps } from '@/types'
 
 const CategoryList: React.FC<CategoryListProps> = ({ categories }) => {
   return (
@@ -16,7 +16,7 @@ const CategoryList: React.FC<CategoryListProps> = ({ categories }) => {
         ))}
       </ListGroup>
     </div>
-  );
-};
+  )
+}
 
-export default CategoryList;
+export default CategoryList

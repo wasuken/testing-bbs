@@ -1,11 +1,11 @@
-"use client";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import PostForm from "@/components/PostForm";
+'use client'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import PostForm from '@/components/PostForm'
 
 const NewPost: React.FC = () => {
-  const router = useRouter();
-  const [categories, setCategories] = useState([]);
+  const router = useRouter()
+  const [categories, setCategories] = useState([])
 
   const handlePostSubmit = async (
     title: string,
@@ -13,30 +13,30 @@ const NewPost: React.FC = () => {
     author: string,
     categoryId: number,
   ) => {
-    const response = await fetch("/api/posts", {
-      method: "POST",
+    const response = await fetch('/api/posts', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ title, content, author, categoryId }),
-    });
+    })
 
     if (response.ok) {
       // 投稿一覧ページ(登録したカテゴリ)にリダイレクト
-      router.push(`/posts?categoryId=${categoryId}`);
+      router.push(`/posts?categoryId=${categoryId}`)
     } else {
-      throw new Error("Failed to create post");
+      throw new Error('Failed to create post')
     }
-  };
+  }
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const response = await fetch("/api/categories");
-      const data = await response.json();
-      setCategories(data);
-    };
-    fetchCategories();
-  }, []);
+      const response = await fetch('/api/categories')
+      const data = await response.json()
+      setCategories(data)
+    }
+    fetchCategories()
+  }, [])
 
   return (
     <div>
@@ -47,7 +47,7 @@ const NewPost: React.FC = () => {
         categories={categories}
       />
     </div>
-  );
-};
+  )
+}
 
-export default NewPost;
+export default NewPost

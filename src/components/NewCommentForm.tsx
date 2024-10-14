@@ -1,40 +1,40 @@
-import { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import { NewCommentFormProps } from "@/types";
+import { useState } from 'react'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+import { NewCommentFormProps } from '@/types'
 
 const NewCommentForm: React.FC<NewCommentFormProps> = ({
   onSubmit,
-  submitButtonText = "コメントを投稿",
+  submitButtonText = 'コメントを投稿',
 }) => {
-  const [content, setContent] = useState<string>("");
-  const [author, setAuthor] = useState<string>("");
-  const [error, setError] = useState<string | null>(null);
+  const [content, setContent] = useState<string>('')
+  const [author, setAuthor] = useState<string>('')
+  const [error, setError] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    let nauthor = author;
+    e.preventDefault()
+    let nauthor = author
 
-    if (!content) {
-      setError("コメントは必須です。");
-      return;
+    if (!content || content.length <= 0) {
+      setError('コメントは必須です。')
+      return
     }
-    if (!author) nauthor = "noname";
+    if (!author) nauthor = 'noname'
 
     try {
-      await onSubmit(content, nauthor);
-      setContent("");
-      setAuthor("");
-      setError(null);
+      await onSubmit(content, nauthor)
+      setContent('')
+      setAuthor('')
+      setError(null)
     } catch (err) {
-      setError("コメントの投稿に失敗しました。");
-      console.log(err);
+      setError('コメントの投稿に失敗しました。')
+      console.error(err)
     }
-  };
+  }
 
   return (
     <Form onSubmit={handleSubmit}>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <Form.Group className="mb-3" controlId="PostForm.Author">
         <Form.Label>ニックネーム</Form.Label>
         <Form.Control
@@ -58,7 +58,7 @@ const NewCommentForm: React.FC<NewCommentFormProps> = ({
         {submitButtonText}
       </Button>
     </Form>
-  );
-};
+  )
+}
 
-export default NewCommentForm;
+export default NewCommentForm

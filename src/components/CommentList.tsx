@@ -1,6 +1,6 @@
-import React from "react";
-import ListGroup from "react-bootstrap/ListGroup";
-import { CommentListProps } from "@/types";
+import React from 'react'
+import ListGroup from 'react-bootstrap/ListGroup'
+import { CommentListProps } from '@/types'
 
 const CommentList: React.FC<CommentListProps> = ({ comments }) => {
   return (
@@ -16,7 +16,7 @@ const CommentList: React.FC<CommentListProps> = ({ comments }) => {
         ))}
       </ListGroup>
     </div>
-  );
-};
+  )
+}
 
-export default CommentList;
+export default CommentList

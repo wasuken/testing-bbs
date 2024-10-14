@@ -1,57 +1,62 @@
 export interface Post {
-  id?: number;
-  title: string;
-  content: string;
-  author: string;
-  category: Category;
-  createdAt?: string;
+  id?: number
+  title: string
+  content: string
+  author: string
+  category: Category
+  createdAt?: string
 }
 
 export interface Comment {
-  id?: number;
-  post: Post;
-  content: string;
-  author: string;
-  createdAt?: string;
+  id?: number
+  post: Post
+  content: string
+  author: string
+  createdAt?: string
 }
 
 export interface Category {
-  id?: number;
-  title: string;
-  createdAt?: string;
+  id?: number
+  title: string
+  createdAt?: string
 }
 
 export interface CategoryListProps {
-  categories: Category[];
+  categories: Category[]
 }
 
 export interface CommentListProps {
-  comments: Comment[];
+  comments: Comment[]
 }
 
 export interface NewCommentFormProps {
-  onSubmit: (content: string, author: string) => void;
-  submitButtonText: string;
+  onSubmit: (content: string, author: string) => void
+  submitButtonText: string
+}
+
+export interface NewCategoryFormProps {
+  onSubmit: (title: string) => void
+  submitButtonText: string
 }
 
 export interface PostDetailProps {
-  post: Post;
-  onDelete: () => void;
-  onEdit: () => void;
+  post: Post
+  onDelete: () => void
+  onEdit: () => void
 }
 
 export interface PostFormProps {
-  initialPost: Post;
+  initialPost: Post
   onSubmit: (
     title: string,
     content: string,
     author: string,
     categoryId: number,
-  ) => void;
-  submitButtonText: string;
-  categories: Category[];
+  ) => void
+  submitButtonText: string
+  categories: Category[]
 }
 
 export interface PostListProps {
-  posts: Post[];
+  posts: Post[]
 }

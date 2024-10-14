@@ -1,6 +1,6 @@
-import React from "react";
-import ListGroup from "react-bootstrap/ListGroup";
-import { PostListProps } from "@/types";
+import React from 'react'
+import ListGroup from 'react-bootstrap/ListGroup'
+import { PostListProps } from '@/types'
 
 const PostList: React.FC<PostListProps> = ({ posts }) => {
   return (
@@ -18,7 +18,7 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
         ))}
       </ListGroup>
     </div>
-  );
-};
+  )
+}
 
-export default PostList;
+export default PostList

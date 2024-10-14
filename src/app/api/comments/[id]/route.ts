@@ -1,40 +1,40 @@
-import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import { NextResponse } from 'next/server'
+import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
 
 export async function GET(
   req: Request,
   { params }: { params: { id: number } },
 ) {
-  const id = Number(params.id);
+  const id = Number(params.id)
   const comment = await prisma.comment.findFirst({
     where: {
       id,
     },
-  });
+  })
 
   if (!comment) {
     return NextResponse.json(
-      { message: "投稿が見つかりません。" },
+      { message: '投稿が見つかりません。' },
       { status: 404 },
-    );
+    )
   }
 
-  return NextResponse.json(comment);
+  return NextResponse.json(comment)
 }
 
 export async function PUT(
   req: Request,
   { params }: { params: { id: number } },
 ) {
-  const { title, content, author, categoryId } = await req.json();
-  const id = params.id;
+  const { title, content, author, categoryId } = await req.json()
+  const id = params.id
 
   if (!title || !content || categoryId) {
     return NextResponse.json(
-      { message: "タイトルと内容とカテゴリは必須です。" },
+      { message: 'タイトルと内容とカテゴリは必須です。' },
       { status: 400 },
-    );
+    )
   }
   const post = await prisma.post.update({
     where: {
@@ -46,12 +46,12 @@ export async function PUT(
       author,
       categoryId,
     },
-  });
+  })
   if (!post) {
     return NextResponse.json(
-      { message: "投稿が見つかりません。" },
+      { message: '投稿が見つかりません。' },
       { status: 404 },
-    );
+    )
   }
 }
 
@@ -59,19 +59,19 @@ export async function DELETE(
   req: Request,
   { params }: { params: { id: number } },
 ) {
-  const id = Number(params.id);
+  const id = Number(params.id)
   const deletePost = await prisma.post.delete({
     where: {
       id,
     },
-  });
+  })
   if (!deletePost) {
     return NextResponse.json(
-      { message: "投稿が見つかりません。" },
+      { message: '投稿が見つかりません。' },
       { status: 404 },
-    );
+    )
   }
   return NextResponse.json({
     deletePost,
-  });
+  })
 }
