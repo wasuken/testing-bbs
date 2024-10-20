@@ -1,5 +1,7 @@
 import React from 'react'
 import ListGroup from 'react-bootstrap/ListGroup'
+import Badge from 'react-bootstrap/Badge'
+
 import { CategoryListProps } from '@/types'
 
 const CategoryList: React.FC<CategoryListProps> = ({ categories }) => {
@@ -10,7 +12,8 @@ const CategoryList: React.FC<CategoryListProps> = ({ categories }) => {
         {categories.map((category) => (
           <ListGroup.Item key={category.id}>
             <h3>
-              <a href={`/posts?categoryId=${category.id}`}>{category.title}</a>
+              <a href={`/posts?categoryId=${category.id}`}>{category.title}</a>{' '}
+              <Badge bg="info">{category.count}</Badge>
             </h3>
           </ListGroup.Item>
         ))}

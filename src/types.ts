@@ -3,7 +3,7 @@ export interface Post {
   title: string
   content: string
   author: string
-  category: Category
+  categoryId: number
   createdAt?: string
 }
 
@@ -21,8 +21,12 @@ export interface Category {
   createdAt?: string
 }
 
+export interface CategoryListItem extends Category {
+  count: number
+}
+
 export interface CategoryListProps {
-  categories: Category[]
+  categories: CategoryListItem[]
 }
 
 export interface CommentListProps {

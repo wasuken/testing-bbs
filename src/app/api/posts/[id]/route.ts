@@ -53,6 +53,7 @@ export async function PUT(
       { status: 404 },
     )
   }
+  return NextResponse.json({ post })
 }
 
 export async function DELETE(

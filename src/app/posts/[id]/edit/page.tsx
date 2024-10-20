@@ -7,47 +7,45 @@ const EditPostPage: React.FC = ({ params }: { params: { id: number } }) => {
   const router = useRouter()
   const id = params.id
   const [post, setPost] = useState<Post | null>(null)
-  const [title, setTitle] = useState<string>('')
-  const [content, setContent] = useState<string>('')
-  const [author, setAuthor] = useState<string>('')
+  const [categories, setCategories] = useState<Category[]>([])
 
   useEffect(() => {
     const fetchPost = async () => {
       const response = await fetch(`/api/posts/${id}`)
       const data = await response.json()
       setPost(data)
-      setTitle(data.title)
-      setContent(data.content)
-      setAuthor(data.author)
     }
 
     if (id) {
       fetchPost()
     }
   }, [id])
-
-  const handlePostSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    let nauthor = author
-
-    if (!title || !content) {
-      setError('タイトルと内容は必須です。')
-      return
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const response = await fetch(`/api/categories`)
+      const data = await response.json()
+      setCategories(data)
     }
-    if (!author) nauthor = 'noname'
+    fetchCategories()
+  }, [])
 
+  const handlePostSubmit = async (
+    title: string,
+    content: string,
+    author: string,
+  ) => {
     const response = await fetch(`/api/posts/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ title, content, author: nauthor }),
+      body: JSON.stringify({ title, content, author }),
     })
 
     if (response.ok) {
       router.push(`/posts/${id}`) // 編集後、投稿詳細ページにリダイレクト
     } else {
-      setError('投稿の更新に失敗しました。')
+      alert('failed: update')
     }
   }
 
@@ -60,6 +58,7 @@ const EditPostPage: React.FC = ({ params }: { params: { id: number } }) => {
         initialPost={post}
         onSubmit={handlePostSubmit}
         submitButtonText="更新する"
+        categories={categories}
       />
     </div>
   )

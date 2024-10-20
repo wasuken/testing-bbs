@@ -22,6 +22,21 @@ export async function POST(req: Request) {
 }
 
 export async function GET() {
-  const categories = await prisma.category.findMany()
-  return NextResponse.json(categories)
+  const categories = await prisma.category.findMany({
+    select: {
+      id: true,
+      title: true,
+      _count: {
+        select: {
+          posts: true,
+        },
+      },
+    },
+  })
+  const renamedCategories = categories.map((category) => ({
+    id: category.id,
+    title: category.title,
+    count: category._count.posts,
+  }))
+  return NextResponse.json(renamedCategories)
 }

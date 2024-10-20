@@ -8,19 +8,18 @@ const PostForm: React.FC<PostFormProps> = ({
     title: '',
     content: '',
     author: '',
-    category: {
-      id: -1,
-    },
+    categoryId: -1,
   },
   onSubmit,
   submitButtonText,
-  categories,
+  categories = [],
 }) => {
+  console.log(initialPost)
   const [title, setTitle] = useState<string>(initialPost.title)
   const [content, setContent] = useState<string>(initialPost.content)
   const [author, setAuthor] = useState<string>(initialPost.author)
   const [categoryId, setCategoryId] = useState<number>(
-    initialPost.category.id ?? -1,
+    initialPost.categoryId ?? -1,
   )
   const [error, setError] = useState<string | null>(null)
 

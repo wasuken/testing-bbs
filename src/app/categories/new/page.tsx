@@ -14,10 +14,9 @@ const CategoryPage: React.FC = () => {
       alert(`error: request failed.`)
     }
     await response.json()
-    setCategory('')
   }
 
-  return <NewCategoryForm onSubmit={postCategory} />
+  return <NewCategoryForm onSubmit={postCategory} submitButtonText="作成" />
 }
 
 export default CategoryPage
